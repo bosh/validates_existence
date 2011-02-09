@@ -14,7 +14,7 @@ module ValidatesExistence
             object = subject
             object.send("#{association}=", nil)
             object.should_not be_valid
-            object.errors[reflection.primary_key_name.to_sym].should include(I18n.t("activerecord.errors.messages.existence"))
+            object.errors[reflection.primary_key_name.to_sym].join(", ").should include(I18n.t(:existence, :scope => "activerecord.errors.messages", :association => association.to_s.titleize))
           end
         end
 
